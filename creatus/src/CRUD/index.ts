@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import express from "express";
-// import jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 const app = express();
 app.use(express.json());
@@ -32,6 +32,42 @@ app.post("/register", async (req, res) => {
       },
     });
     res.status(201).json({ msg: "Usuário criado com sucesso", user });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      msg: "Server error",
+    });
+  }
+});
+
+app.post("/auth/login", async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400 || 422).json({ msg: "Preencha todos os campos!" });
+  }
+  const user = await prisma.users.findUnique({
+    where: {
+      email: email,
+    },
+  });
+
+  if (!user) {
+    return res.status(404).json({ msg: "Usuário não encontrado!" }); // verifica se o email existe
+  }
+  const checkPassword = await bcrypt.compare(password, user.password); // verifica se a senha esta correta
+
+  if (!checkPassword) {
+    return res.status(422).json({ msg: "Senha inválida" });
+  }
+  try {
+    const secret = process.env.SECRET;
+    const token = jwt.sign(
+      {
+        id: user.id,
+      },
+      secret
+    );
+    res.status(200).json({ msg: "usuario autenticado", token });
   } catch (error) {
     console.log(error);
     res.status(500).json({
