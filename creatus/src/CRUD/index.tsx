@@ -97,9 +97,9 @@ app.get(`/email/:email`, checkToken, async (req, res) => {
     return res.status(404).json({ msg: "Usuário não encontrado" });
   }
 });
-//atualiza um usuário especifico
 
-app.put("/updateuser", async (req, res) => {
+//atualiza um usuário especifico
+app.put("/updateuser", checkToken, async (req, res) => {
   const { name, email, level } = req.body;
   if (!name || !email || !level) {
     return res.status(400).json({ msg: "Preencha todos os campos!" });
@@ -114,8 +114,8 @@ app.put("/updateuser", async (req, res) => {
       },
       data: {
         name,
-        level,
-      },
+        level
+      }
     });
     res.status(200).json({msg:"Usuário atualizado", user});
   } catch (error) {
