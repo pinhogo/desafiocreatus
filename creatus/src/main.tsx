@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Login from "./pages/Login.tsx";
+import Login from "./pages/Login";
 import "./index.css";
 //import Leftd from "./components/login/leftd.tsx";
 

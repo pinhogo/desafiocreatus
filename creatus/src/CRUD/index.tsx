@@ -186,21 +186,38 @@ app.post("/login", async (req, res) => {
   }
 });
 
-const server = app.listen(3000, () =>
+// const server = 
+app.listen(3000, () =>
   console.log(`🚀 Server ready at: http://localhost:3000`)
 );
-// Handling errors
-process.on("uncaughtException", (err) => {
-  console.error("Uncaught Exception:", err);
-  server.close(() => {
-    console.log("Server closed");
-    process.exit(1);
-  });
-});
 
-process.on("SIGTERM", () => {
-  console.log("SIGTERM signal received.");
-  server.close(() => {
-    console.log("Server closed");
-  });
-});
+
+// pedi para o copilot criar essa parte do código abaixo, quando estava programandp 
+//  no linux a porta 3000 ficava sempre aberta, então caso ocorra algum erro ele 
+//  executa esse arquivo close.sh 3000 que fecha a porta automaticamente
+
+// const { exec } = require('child_process');
+
+// process.on("uncaughtException", (err) => {
+//   console.error("Uncaught Exception:", err);
+//   server.close(() => {
+//     console.log("Server closed");
+//     // Executa o script close.sh com o argumento 3000
+//     exec('./close.sh 3000', (error: Error | null, stdout: string, stderr: string) => {
+//       if (error) {
+//         console.error(`exec error: ${error}`);
+//         return;
+//       }
+//       console.log(`stdout: ${stdout}`);
+//       console.error(`stderr: ${stderr}`);
+//     });
+//     process.exit(1);
+//   });
+// });
+
+// process.on("SIGTERM", () => {
+//   console.log("SIGTERM signal received.");
+//   server.close(() => {
+//     console.log("Server closed");
+//   });
+// });

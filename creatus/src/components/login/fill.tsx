@@ -16,12 +16,9 @@ function Fill({ placeholder, description, type, onChange }: Props) {
           className="flex w-28.7e h-3e 
                         rounded-lg 
                         border border-solid border-cinzinha
-                        self-stretch items-center
-                        pl-1e
-                        "
-        >
+                        self-stretch items-center">
           <input
-            className="text-xl flex w-8/12 h-4/6 border-none outline-none"
+            className="text-xl pl-1e flex bg-transparent w-full h-full border-none outline-none"
             type={type}
             placeholder={placeholder}
             onChange={onChange}

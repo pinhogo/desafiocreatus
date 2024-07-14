@@ -13,6 +13,7 @@ module.exports = {
       'cinza': '#718096',
       'red': '#FF0000',
       'green': '#00FF00',	
+      'transparent': 'transparent',
     },
     spacing: {
       '28.7e': '28.7em',
@@ -24,6 +25,7 @@ module.exports = {
       '05e':  '0.5em',
       '1e': '1em',
       '100%h': '100vh',
+      '100%w': '100vw',
       '50%w': '50%',
       '30%w': '30wh',
     },

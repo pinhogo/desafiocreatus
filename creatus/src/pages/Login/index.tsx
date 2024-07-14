@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from "react";
-import Butoonl from "../components/login/botaologin.jsx";
-import Fill from "../components/login/fill.tsx";
-import bg from "../assets/img/bg.svg";
+import Butoonl from "../../components/login/botaologin.js";
+import Fill from "../../components/login/fill.tsx";
+import bg from "../../assets/img/bg.svg";
 
 function Login() {
   const [email, setEmail] = useState("");
