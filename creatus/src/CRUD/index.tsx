@@ -4,8 +4,11 @@ const prisma = new PrismaClient();
 import express, { Request, Response, NextFunction } from "express";
 import jwt, { Secret } from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import cors from "cors";
+
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 //registra usuario novo
 app.post("/register", async (req, res) => {
@@ -114,10 +117,10 @@ app.put("/updateuser", checkToken, async (req, res) => {
       },
       data: {
         name,
-        level
-      }
+        level,
+      },
     });
-    res.status(200).json({msg:"Usuário atualizado", user});
+    res.status(200).json({ msg: "Usuário atualizado", user });
   } catch (error) {
     return res.status(404).json({ msg: "Usuário não encontrado" });
   }
@@ -143,6 +146,9 @@ function checkToken(req: Request, res: Response, next: NextFunction) {
 
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
+
+  console.log("Requisição recebida com email:", email, "e password:", password);
+
   if (!email || !password) {
     return res.status(400 || 422).json({ msg: "Preencha todos os campos!" });
   }
@@ -162,7 +168,7 @@ app.post("/login", async (req, res) => {
 
   try {
     if (!process.env.SECRET) {
-      throw new Error("A variável de ambiente JWT_SECRET não está definida.");
+      throw new Error("A variável de ambiente SECRET não está definida.");
     }
     const secret = process.env.SECRET;
     const token = jwt.sign(
@@ -171,7 +177,7 @@ app.post("/login", async (req, res) => {
       },
       secret
     );
-    res.status(200).json({ msg: "usuario autenticado", token });
+    res.status(200).json({ msg: "usuario autenticado", token, user });
   } catch (error) {
     console.log(error);
     res.status(500).json({

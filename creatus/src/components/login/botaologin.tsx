@@ -11,11 +11,13 @@ function Butoonl({ textobt }: Props) {
                    font-weight-500
                     w-28.7e h-3e rounded-lg 
                     hover:scale-101
-                    hover:active:scale-100"
+                    hover:active:scale-100
+                    "
       >
         {textobt}
       </button>
     </div>
   );
 }
+
 export default Butoonl;

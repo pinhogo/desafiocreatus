@@ -11,6 +11,8 @@ module.exports = {
       'black': '#000000',
       'cinzinha': '#CBD5E1',
       'cinza': '#718096',
+      'red': '#FF0000',
+      'green': '#00FF00',	
     },
     spacing: {
       '28.7e': '28.7em',
@@ -21,8 +23,9 @@ module.exports = {
       '12r': '12rem',
       '05e':  '0.5em',
       '1e': '1em',
-      '100%': '100vh',
-      '50%': '50vh',
+      '100%h': '100vh',
+      '50%w': '50%',
+      '30%w': '30wh',
     },
     fontFamily: {
       'inter': ['inter','system-ui'],
