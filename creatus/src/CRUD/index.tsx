@@ -6,6 +6,10 @@ import jwt, { Secret } from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import cors from "cors";
 
+import { json2csv } from 'json-2-csv';
+
+
+
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -47,9 +51,23 @@ app.post("/register", async (req, res) => {
 });
 
 //retorna todos usuarios
-app.get("/findall", async (req, res) => {
+app.get("/findall", checkToken, async (req, res) => {
   const allusers = await prisma.users.findMany();
   res.json(allusers);
+});
+
+app.get("/export/csv", async (req, res) => {
+  try {
+    const allusers = await prisma.users.findMany();
+    // Converte JSON para CSV
+    const csvString =  json2csv(allusers, { unwindArrays: true });
+    res.header('Content-Type', 'text/csv');
+    res.attachment("filename.csv");
+    return res.send(csvString);
+  } catch (error) {
+    console.error("Erro ao converter JSON para CSV:", error);
+    return res.status(500).json({ msg: "Erro no servidor ao exportar CSV" });
+  }
 });
 
 //retorna um usuário especifico pelo id

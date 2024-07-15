@@ -1,9 +1,13 @@
 import { useState, ChangeEvent, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Butoonl from "../../components/login/botaologin.js";
 import Fill from "../../components/login/fill.tsx";
 import bg from "../../assets/img/bg.svg";
 
 function Login() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -11,8 +15,8 @@ function Login() {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-      setError(null);
-      setLogin(null);
+    setError(null);
+    setLogin(null);
 
     const data = { email, password };
     const response = await fetch("http://localhost:3000/login", {
@@ -25,12 +29,14 @@ function Login() {
 
     if (response.status === 200) {
       const { token, user } = await response.json();
+      
       setLogin("Login bem-sucedido!");
       console.log("Login bem-sucedido!", log);
       console.log("Token:", token);
       console.log("User:", user);
+      navigate("/list");
     } else {
-      const {msg} = await response.json();
+      const { msg } = await response.json();
       console.log(msg);
       error;
       setError(msg);
