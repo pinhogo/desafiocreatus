@@ -18,7 +18,8 @@ cors para permitir a integraçao do front com back
 
 no front utilizei o React, instalei com o vite, conforme o Léozão nos ensinou no grupo.
 
-./src/CRUD.index.jsx
+./src/CRUD.index.jsx -> localização
+
 [GET]
 ROTA PARA BUSCAR TODOS USUARIOS - PRECISA DO TOKEN DE LOGIN 
 ![image](https://github.com/user-attachments/assets/8843e020-54ad-4f3b-9e15-6066a21fc9b1)
