@@ -5,6 +5,7 @@ import express, { Request, Response, NextFunction } from "express";
 import jwt, { Secret } from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import cors from "cors";
+import { authorizeLevel } from "./verify";
 
 import { json2csv } from 'json-2-csv';
 
@@ -64,7 +65,7 @@ app.get("/findall", checkToken, async (req, res) => {
   res.json(allusers);
 });
 
-app.get("/export/csv", async (req, res) => {
+app.get("/export/csv", authorizeLevel(4), async (req, res) => {
   try {
     const allusers = await prisma.users.findMany();
     // Converte JSON para CSV
