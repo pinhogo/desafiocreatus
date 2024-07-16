@@ -8,7 +8,7 @@ mongo db para banco de dados
 
 e o express para as rotas CRUD  
 
-JWT para gerar os token de autentucaçao
+JWT para gerar os token de autenticação
 
 bccrypt para encriptar a senha no banco
 
