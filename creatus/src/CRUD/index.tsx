@@ -8,11 +8,19 @@ import cors from "cors";
 
 import { json2csv } from 'json-2-csv';
 
-
-
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+app.use((req, res, next) => {
+  const oldJson = res.json;
+  res.json = function(data) {
+    return oldJson.call(this, JSON.parse(JSON.stringify(data, (key, value) =>
+      typeof value === 'bigint' ? value.toString() : value
+    )));
+  };
+  next();
+});
 
 //registra usuario novo
 app.post("/register", async (req, res) => {
@@ -210,32 +218,3 @@ app.listen(3000, () =>
 );
 
 
-// pedi para o copilot criar essa parte do código abaixo, quando estava programandp 
-//  no linux a porta 3000 ficava sempre aberta, então caso ocorra algum erro ele 
-//  executa esse arquivo close.sh 3000 que fecha a porta automaticamente
-
-// const { exec } = require('child_process');
-
-// process.on("uncaughtException", (err) => {
-//   console.error("Uncaught Exception:", err);
-//   server.close(() => {
-//     console.log("Server closed");
-//     // Executa o script close.sh com o argumento 3000
-//     exec('./close.sh 3000', (error: Error | null, stdout: string, stderr: string) => {
-//       if (error) {
-//         console.error(`exec error: ${error}`);
-//         return;
-//       }
-//       console.log(`stdout: ${stdout}`);
-//       console.error(`stderr: ${stderr}`);
-//     });
-//     process.exit(1);
-//   });
-// });
-
-// process.on("SIGTERM", () => {
-//   console.log("SIGTERM signal received.");
-//   server.close(() => {
-//     console.log("Server closed");
-//   });
-// });

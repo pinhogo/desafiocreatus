@@ -2,8 +2,9 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Butoonl from "../../components/login/botaologin.js";
-import Fill from "../../components/login/fill.tsx";
+import Fill from "../../components/login/fill";
 import bg from "../../assets/img/bg.svg";
+import React from "react";
 
 function Login() {
   const navigate = useNavigate();

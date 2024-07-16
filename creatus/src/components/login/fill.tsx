@@ -1,13 +1,15 @@
+import React from "react";
 import { HTMLInputTypeAttribute } from "react";
 
 interface Props {
   description: string;
   placeholder: string;
   type: HTMLInputTypeAttribute;
+  value?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function Fill({ placeholder, description, type, onChange }: Props) {
+function Fill({ placeholder, description, type, value, onChange }: Props) {
   return (
     <>
       <div>
@@ -20,6 +22,7 @@ function Fill({ placeholder, description, type, onChange }: Props) {
           <input
             className="text-xl pl-1e flex bg-transparent w-full h-full border-none outline-none"
             type={type}
+            value={value}
             placeholder={placeholder}
             onChange={onChange}
           />
