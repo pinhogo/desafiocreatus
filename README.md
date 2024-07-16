@@ -1,8 +1,13 @@
 utilizei o prisma para de ORM 
+
 mongo db para banco de dados
+
 e o express para as rotas CRUD  
+
 JWT para gerar os token de autentucaçao
+
 bccrypt para encriptar a senha no banco
+
 json2csv para converter os dados que o prisma busca no banco para csv
 
 
@@ -10,9 +15,7 @@ json2csv para converter os dados que o prisma busca no banco para csv
 
 
   ROTA PARA BUSCAR TODOS USUARIOS - PRECISA DO TOKEN DE LOGIN ./src/CRUD.index.jsx
-	<>
   ![image](https://github.com/user-attachments/assets/8843e020-54ad-4f3b-9e15-6066a21fc9b1)
-  </>		
 
   ROTA QUE GERA O RELATORIO E CSV
 			"name": "/export/csv  GERAR relatorio csv",
